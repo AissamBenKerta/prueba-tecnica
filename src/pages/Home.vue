@@ -35,7 +35,7 @@
 
 <script>
 import dogsCollection from '../firebase';
-import { getDocs} from 'firebase/firestore'
+import { getDocs, deleteDoc, doc} from 'firebase/firestore'
 
 export default {
   name: 'Home',
@@ -57,6 +57,11 @@ export default {
       });
       this.dogs = dogs
     },
+    async deleteDog(dogId){
+      let dogRef = doc(dogsCollection, dogId);
+      await deleteDoc(dogRef);
+      this.$router.go();
+    }
 
   },
   created(){
